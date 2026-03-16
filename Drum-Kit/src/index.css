@@ -1,0 +1,17 @@
+html{
+  background: url('/src/assets/background.jpg');
+  background-size: cover;
+}
+
+.keys{
+  display: flex;
+  flex: 1;
+}
+
+.key{
+}
+
+.kbh{
+  display: block;
+  font-size: 1rem;
+}
