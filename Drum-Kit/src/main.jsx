@@ -5,8 +5,16 @@ import './index.css'
 function App() {
   useEffect(() =>{
     function play(e) {
-      const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-      const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+
+      let keyCode;
+      if (e.type === 'keydown') {
+        keyCode = e.keyCode;
+      } else if (e.type === 'click') {
+        keyCode = e.currentTarget.dataset.key;
+      }
+
+      const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
+      const key = document.querySelector(`div[data-key="${keyCode}"]`);
       if (!audio) return; // stop the function from running all together
 
       key.classList.add('playing');
@@ -21,7 +29,16 @@ function App() {
     
     const keys = Array.from(document.querySelectorAll('.key'));
     keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+    keys.forEach(key => key.addEventListener('click', play));
     window.addEventListener('keydown', play);
+
+    return () => {
+      keys.forEach(key => {
+        key.removeEventListener('transitionend', removeTransition);
+        key.removeEventListener('click', play);
+      });
+      window.removeEventListener('keydown', play);
+    }
   },[]);
 
 return(
