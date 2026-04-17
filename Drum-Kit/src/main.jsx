@@ -83,6 +83,13 @@ return(
     </div>
   </div>
 
+  <div class="sub-keys">
+      <div data-key="32" class="key sub-key">
+      <kbd>Space</kbd>
+      <span class="sound">faah</span>
+      </div>
+  </div>
+
     <div>
       <audio data-key="65" src="/sounds/clap.wav"></audio>
       <audio data-key="83" src="/sounds/hihat.wav"></audio>
@@ -93,6 +100,7 @@ return(
       <audio data-key="74" src="/sounds/snare.wav"></audio>
       <audio data-key="75" src="/sounds/tom.wav"></audio>
       <audio data-key="76" src="/sounds/tink.wav"></audio>
+      <audio data-key="32" src="/sounds/faah.mp3"></audio>
     </div>
     </>
 );
