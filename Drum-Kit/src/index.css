@@ -2,44 +2,56 @@ html{
   font-size: 10px;
   background: url('/src/assets/background.jpg');
   background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  height: 100%;
+
 }
 
-.keys{
+.drum-pad {
   display: flex;
-  flex: 1;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  min-height: 50vh;
+  gap: 3rem;
 }
 
-.key{
+.keys {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.key {
   border: .4rem solid black;
   border-radius: .5rem;
-  margin: 1rem;
+  margin: 0;
   font-size: 1.5rem;
   padding: 1rem .5rem;
-  width: 10rem;
+  width: 100%;
+  min-width: fit-content;
   text-align: center;
   color: white;
   background: rgba(0, 0, 0, .4);
   transition: all .07s ease;
 }
 
-.sub-keys{
+.sub-keys {
   display: flex;
-  flex: 1;
-  align-items: center;
   justify-content: center;
-  margin-top: -20rem;
+  width: 100%;
 }
 
-.sub-key{
+.sub-key {
   border: .4rem solid black;
   border-radius: .5rem;
-  margin: 1rem;
   font-size: 1.5rem;
   padding: 1rem .5rem;
-  width: 100rem;
+  width: 100%;
   text-align: center;
   color: white;
   background: rgba(0, 0, 0, .4);
@@ -62,4 +74,11 @@ kbd{
   transform: scale(1);
   border-color: white;
   box-shadow: 0 0 1rem white;
+}
+
+
+@media (min-width: 660px) {
+  .keys {
+    flex-wrap: nowrap;
+  }
 }

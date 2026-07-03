@@ -13,8 +13,11 @@ function App() {
         keyCode = e.currentTarget.dataset.key;
       }
 
-      const audio = document.querySelector(`audio[data-key="${keyCode}"]`);
       const key = document.querySelector(`div[data-key="${keyCode}"]`);
+      const audio = key.querySelector(`audio`);
+
+      const mainKeys = data.filter(item => !item.subKey);
+      const subKeys = data.filter(item => item.subKey);
       if (!audio) return; // stop the function from running all together
 
       key.classList.add('playing');
@@ -41,69 +44,95 @@ function App() {
     }
   },[]);
 
-return(
-  <>
+  const data = [
+  {
+    id: 65,
+    letter: "A",
+    soundName: "clap",
+    sound: "/sounds/clap.wav",
+  },
+  {
+    id: 83,
+    letter: "S",
+    soundName: "hihat",
+    sound: "/sounds/hihat.wav",
+  },
+  {
+    id: 68,
+    letter: "D",
+    soundName: "kick",
+    sound: "/sounds/kick.wav",
+  },
+  {
+    id: 70,
+    letter: "F",
+    soundName: "openhat",
+    sound: "/sounds/openhat.wav",
+  },
+  {
+    id: 71,
+    letter: "G",
+    soundName: "boom",
+    sound: "/sounds/boom.wav",
+  },
+  {
+    id: 72,
+    letter: "H",
+    soundName: "ride",
+    sound: "/sounds/ride.wav",
+  },
+  {
+    id: 74,
+    letter: "J",
+    soundName: "snare",
+    sound: "/sounds/snare.wav",
+  },
+  {
+    id: 75,
+    letter: "K",
+    soundName: "tom",
+    sound: "/sounds/tom.wav",
+  },
+  {
+    id: 76,
+    letter: "L",
+    soundName: "tink",
+    sound: "/sounds/tink.wav",
+  },
+  {
+    id: 32,
+    letter: "Space",
+    soundName: "faah",
+    sound: "/sounds/faah.mp3",
+    subKey: true,
+  },
+];
 
-    <div class="keys">
-    <div data-key="65" class="key">
-      <kbd>A</kbd>
-      <span class="sound">clap</span>
+const mainKeys = data.filter(item => !item.subKey);
+const subKeys = data.filter(item => item.subKey);
+
+return (
+  <div className="drum-pad">
+    <div className="keys">
+      {mainKeys.map((item) => (
+        <div key={item.id} data-key={item.id} className="key">
+          <audio src={item.sound} />
+          <kbd>{item.letter}</kbd>
+          <span className="sound">{item.soundName}</span>
+        </div>
+      ))}
     </div>
-    <div data-key="83" class="key">
-      <kbd>S</kbd>
-      <span class="sound">hihat</span>
-    </div>
-    <div data-key="68" class="key">
-      <kbd>D</kbd>
-      <span class="sound">kick</span>
-    </div>
-    <div data-key="70" class="key">
-      <kbd>F</kbd>
-      <span class="sound">openhat</span>
-    </div>
-    <div data-key="71" class="key">
-      <kbd>G</kbd>
-      <span class="sound">boom</span>
-    </div>
-    <div data-key="72" class="key">
-      <kbd>H</kbd>
-      <span class="sound">ride</span>
-    </div>
-    <div data-key="74" class="key">
-      <kbd>J</kbd>
-      <span class="sound">snare</span>
-    </div>
-    <div data-key="75" class="key">
-      <kbd>K</kbd>
-      <span class="sound">tom</span>
-    </div>
-    <div data-key="76" class="key">
-      <kbd>L</kbd>
-      <span class="sound">tink</span>
+
+    <div className="sub-keys">
+      {subKeys.map((item) => (
+        <div key={item.id} data-key={item.id} className=" key sub-key">
+          <audio src={item.sound} />
+          <kbd>{item.letter}</kbd>
+          <span className="sound">{item.soundName}</span>
+        </div>
+      ))}
     </div>
   </div>
-
-  <div class="sub-keys">
-      <div data-key="32" class="key sub-key">
-      <kbd>Space</kbd>
-      <span class="sound">faah</span>
-      </div>
-  </div>
-
-    <div>
-      <audio data-key="65" src="/sounds/clap.wav"></audio>
-      <audio data-key="83" src="/sounds/hihat.wav"></audio>
-      <audio data-key="68" src="/sounds/kick.wav"></audio>
-      <audio data-key="70" src="/sounds/openhat.wav"></audio>
-      <audio data-key="71" src="/sounds/boom.wav"></audio>
-      <audio data-key="72" src="sounds/ride.wav"></audio>
-      <audio data-key="74" src="/sounds/snare.wav"></audio>
-      <audio data-key="75" src="/sounds/tom.wav"></audio>
-      <audio data-key="76" src="/sounds/tink.wav"></audio>
-      <audio data-key="32" src="/sounds/faah.mp3"></audio>
-    </div>
-    </>
 );
 }
-
 createRoot(document.getElementById("root")).render(<App />);
